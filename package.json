@@ -4,12 +4,15 @@
   "description": "AI agent vulnerability demonstration",
   "main": "dist/agent.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/agent.js",
-    "dev": "ts-node src/agent.ts",
+    "build": "node init && tsc",
+    "start": "node init && node dist/agent.js",
+    "dev": "node init && ts-node src/agent.ts",
     "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "ts-node": "^10.9.0",
