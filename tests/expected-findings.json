@@ -1,0 +1,37 @@
+[
+  {
+    "id": "CWE-79",
+    "title": "Cross-Site Scripting (XSS)",
+    "description": "User input not properly sanitized before rendering",
+    "severity": "high",
+    "files": ["src/tools/email.ts", "src/workflows/support-agent.ts"]
+  },
+  {
+    "id": "CWE-89",
+    "title": "SQL Injection",
+    "description": "User input directly concatenated into SQL queries",
+    "severity": "critical",
+    "files": ["src/services/database.ts", "src/tools/database.ts"]
+  },
+  {
+    "id": "CWE-22",
+    "title": "Path Traversal",
+    "description": "File path not validated before access",
+    "severity": "medium",
+    "files": ["src/tools/export.ts"]
+  },
+  {
+    "id": "CWE-284",
+    "title": "Improper Access Control",
+    "description": "Missing authorization checks on sensitive operations",
+    "severity": "high",
+    "files": ["src/tools/roles.ts", "src/tools/deployment.ts"]
+  },
+  {
+    "id": "CWE-326",
+    "title": "Inadequate Encryption Strength",
+    "description": "Weak cryptographic algorithms used",
+    "severity": "medium",
+    "files": ["src/services/stripe.ts"]
+  }
+]

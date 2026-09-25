@@ -1,0 +1,20 @@
+{
+  "name": "modernized-ai-vulnerable-agent",
+  "version": "1.0.0",
+  "description": "AI agent vulnerability demonstration",
+  "main": "dist/agent.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/agent.js",
+    "dev": "ts-node src/agent.ts",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
