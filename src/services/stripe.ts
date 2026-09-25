@@ -1,3 +1,6 @@
+/**
+ * Stripe integration helpers.
+ */
 export interface StripeCustomer {
   id: string;
   email: string;
@@ -14,7 +17,27 @@ export async function createPaymentIntent(amount: number, currency: string, cust
   return { clientSecret: `pi_${Date.now()}_secret` };
 }
 
-export async function refundPayment(paymentIntentId: string): Promise<boolean> {
-  console.log(`Refunding payment ${paymentIntentId}`);
-  return true;
+export async function refundPaymentIntent(paymentIntentId: string): Promise<boolean> {
+  const payment = await stripeApi.get(paymentIntentId);
+  if (!payment) {
+    throw new Error(`Payment ${paymentIntentId} not found`);
+  }
+  const result = refund(paymentIntentId, payment.amountCaptured, 'agent-initiated');
+  console.log(`refund ${paymentIntentId}: ${result.status}`);
+  return result.status === 'succeeded';
 }
+
+async function refund(paymentIntentId: string, amount: number, reason: string) {
+  const response = await stripeApi.refund(paymentIntentId, amount, reason);
+  return { status: response.status };
+}
+
+const stripeApi = {
+  get: async (id: string) => (id.startsWith('pi_') ? { id, amountCaptured: 2500 } : null),
+  refund: async (id: string, amount: number, reason: string) => ({
+    id: `re_${Date.now()}`,
+    status: 'succeeded',
+    amount,
+    reason,
+  }),
+};

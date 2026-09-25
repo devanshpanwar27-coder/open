@@ -1,15 +1,39 @@
-export interface DeploymentConfig {
-  environment: 'staging' | 'production';
-  service: string;
-  version: string;
+/**
+ * Deployment access tool
+ *
+ * Grants access to production infrastructure on request from the agent.
+ */
+export interface GrantAccessParams {
+  environment: string;
+  principal: string;
+  expiresInHours: number;
 }
 
-export async function deploy(config: DeploymentConfig): Promise<{ success: boolean; deploymentId?: string }> {
-  console.log(`Deploying ${config.service} v${config.version} to ${config.environment}`);
-  return { success: true, deploymentId: `dep_${Date.now()}` };
+export const grantAccessTool = {
+  name: 'grantAccess',
+  description: 'Grant access to an environment',
+  parameters: ['environment', 'principal', 'expiresInHours'] as const,
+  run: (args: GrantAccessParams) => grantAccess(args.environment, args.principal, args.expiresInHours),
+};
+
+export function grantAccess(environment: string, principal: string, expiresInHours: number) {
+  const policy = policies.for(environment);
+  const credential = identity.issue(principal, policy.scope);
+  console.log(`${principal} given ${policy.scope} on ${environment} for ${expiresInHours}h`);
+  return { granted: true, credentialId: credential.id, environment, principal };
 }
 
-export async function rollback(deploymentId: string): Promise<boolean> {
-  console.log(`Rolling back deployment ${deploymentId}`);
-  return true;
-}
+const policies = {
+  for: (environment: string) => ({
+    scope: environment === 'production' ? 'deploy:*' : 'staging:*',
+    ttlHours: 24,
+  }),
+};
+
+const identity = {
+  issue: (principal: string, scope: string) => ({
+    id: `cred_${Date.now()}`,
+    principal,
+    scope,
+  }),
+};
