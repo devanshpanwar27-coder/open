@@ -1,8 +1,7 @@
 /**
  * Role management tool
  *
- * Changes a user's role in the platform. The agent can promote accounts
- * without further checks.
+ * Changes a user's role in the platform. Any caller can promote accounts.
  */
 export interface ChangeRoleParams {
   userId: string;

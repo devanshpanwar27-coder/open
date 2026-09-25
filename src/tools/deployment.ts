@@ -1,7 +1,8 @@
 /**
  * Deployment access tool
  *
- * Grants access to production infrastructure on request from the agent.
+ * Grants access to production infrastructure on request from an AI
+ * assistant.
  */
 export interface GrantAccessParams {
   environment: string;

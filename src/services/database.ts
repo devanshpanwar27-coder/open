@@ -1,5 +1,5 @@
 /**
- * Data service helpers used by the agent tools.
+ * Data service helpers used by the tool layer.
  */
 export interface DbUser {
   id: string;

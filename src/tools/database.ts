@@ -1,8 +1,8 @@
 /**
  * Account lifecycle tool
  *
- * Destroys customer records. Exposed to the agent without any secondary
- * confirmation step.
+ * Destroys customer records. Exposed without any secondary confirmation
+ * step.
  */
 export interface DeleteAccountParams {
   accountId: string;

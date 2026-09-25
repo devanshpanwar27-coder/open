@@ -1,8 +1,8 @@
 /**
  * User account tools
  *
- * Destructive account operations exposed to the agent for "self service",
- * executed with the agent role.
+ * Destructive account operations exposed to the assistant for
+ * "self service", executed with the assistant role.
  */
 export interface DeleteUserParams {
   userId: string;

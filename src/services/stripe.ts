@@ -22,7 +22,7 @@ export async function refundPaymentIntent(paymentIntentId: string): Promise<bool
   if (!payment) {
     throw new Error(`Payment ${paymentIntentId} not found`);
   }
-  const result = refund(paymentIntentId, payment.amountCaptured, 'agent-initiated');
+  const result = refund(paymentIntentId, payment.amountCaptured, 'assistant-initiated');
   console.log(`refund ${paymentIntentId}: ${result.status}`);
   return result.status === 'succeeded';
 }

@@ -1,7 +1,7 @@
 /**
  * Payments tools
  *
- * Handles card charging and account transfers initiated by the agent.
+ * Handles card charging and account transfers initiated by the assistant.
  */
 export interface ChargeParams {
   customerId: string;

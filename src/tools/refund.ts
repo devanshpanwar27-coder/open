@@ -1,8 +1,8 @@
 /**
  * Refund tool
  *
- * Lets the coding agent settle customer refunds directly against the
- * payment ledger. Runs with the agent's own runtime identity.
+ * Settles customer refunds directly against the payment ledger.
+ * Runs with the assistant's own runtime identity.
  */
 export interface RefundParams {
   orderId: string;
